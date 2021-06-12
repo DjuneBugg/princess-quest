@@ -58,7 +58,18 @@ class Story():
         self.bg_dragon_castle.draw(self.screen)
 
         txt = 'A princess has been captured by a dragon. The king has offered a castle as a reward for rescuing her.\n' +\
-                         'Choose your equipment for the adventure (lockpick or sword)'
+                         'Hit enter to continue'
+        render_text_centered(txt, self.screen, TEXT_X, TEXT_Y, S_WIDTH)
+        yield
+
+        self.valid_text = True
+        self.input_text = ''
+        self.screen.fill((0,0,0))
+
+        # Equipment stage
+        self.bg_lock_sword.draw(self.screen)
+
+        txt = 'Choose your equipment for the adventure (lockpick or sword)'
         render_text_centered(txt, self.screen, TEXT_X, TEXT_Y, S_WIDTH)
         valid_text = False
         while not valid_text:
@@ -78,8 +89,8 @@ class Story():
         self.input_text = ''
         self.screen.fill((0,0,0))
 
-        # Quest stage
-        self.bg_lock_sword.draw(self.screen)
+        # Goblin stage
+        self.bg_goblin.draw(self.screen)
 
         valid_text = False
         while not valid_text:
