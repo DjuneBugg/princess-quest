@@ -1,14 +1,14 @@
 import math
 import pygame
 
-S_WIDTH = 1500
-S_HEIGHT = 1000
-B_WIDTH = 1500
-B_HEIGHT = 800
-TEXT_X = S_WIDTH/2
-TEXT_Y = 800
-INPUT_X = 700
-INPUT_Y = 900
+S_WIDTH = 1700
+S_HEIGHT = 1200
+B_WIDTH = S_WIDTH
+B_HEIGHT = 900
+TEXT_X = math.floor(S_WIDTH/2)
+TEXT_Y = B_HEIGHT
+INPUT_X = math.floor(S_WIDTH/2)
+INPUT_Y = S_HEIGHT - 75
 
 
 def render_text_centered(text, screen, x, y, allowed_width=math.inf, font=None, colour=(255,255,255)):

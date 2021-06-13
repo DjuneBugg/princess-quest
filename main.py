@@ -20,7 +20,7 @@ def main():
     user_text = ''
     input_font = pygame.font.SysFont('Comic Sans MS', 30)
     input_rect = pygame.Rect(INPUT_X, INPUT_Y, 140, 50)
-    input_rect_colour = (100,100,0)
+    input_rect_colour = (0,0,0)
 
     # Create story
     story = Story(screen)
@@ -50,7 +50,7 @@ def main():
         # Draw input text box
         pygame.draw.rect(screen, input_rect_colour, input_rect)
         # Draw input text
-        text_surface = input_font.render(user_text, True, (255, 255, 255))
+        text_surface = input_font.render(user_text, True, (100, 100, 0))
         screen.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
         # set width of textfield so that text cannot get outside of user's text input
         input_rect.w = max(100, text_surface.get_width() + 10)
