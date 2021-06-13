@@ -22,6 +22,13 @@ class Story():
         self.bg_castle_princess = MySprite('pictures/castle_princess.jpg')
         self.bg_victory_castle = MySprite('pictures/lonely_castle.jpg')
         self.bg_victory_princess = MySprite('pictures/lonely_princess.jpg')
+        self.reset_choices()
+        self.story_loop('')
+        self.valid_text = False
+        # Rectangle to cover up text for each story
+        self.text_rect = pygame.Rect(0, TEXT_Y, S_WIDTH, 300)
+
+    def reset_choices(self):
         self.lockpick = False
         self.sword = False
         self.pinky = True
@@ -32,10 +39,6 @@ class Story():
         self.castle = False
         self.princess = False
         self.story_generator = self._story_generator()
-        self.story_loop('')
-        self.valid_text = False
-        # Rectangle to cover up text for each story
-        self.text_rect = pygame.Rect(0, TEXT_Y, S_WIDTH, 300)
 
     def story_loop(self, txt):
         """
@@ -65,10 +68,13 @@ class Story():
         ##############################################################
         # Quest stage
         ##############################################################
+        self.valid_text = True
+        self.input_text = ''
+        self.screen.fill((0, 0, 0))
         self.bg_dragon_castle.draw(self.screen)
 
         txt = 'A princess has been captured by a dragon. The king has offered a castle as a reward for rescuing her.\n' +\
-                         'This is a typing game, type with keyboard and hit enter to continue'
+                         'This is a typing game, type with keyboard and hit enter to continue. Escape will quit'
         render_text_centered(txt, self.screen, TEXT_X, TEXT_Y, S_WIDTH)
         yield
 
@@ -174,7 +180,7 @@ class Story():
         self.screen.fill((0,0,0))
         self.bg_princess_door.draw(self.screen)
 
-        txt = 'Hooray! You found the princess door, but there is a code'
+        txt = 'Hooray! You found the princess door, but there is a code:'
         give_up = False
         if self.lockpick:
             txt = txt + '\nThankfully you got through the door with the lockpick!'
@@ -319,3 +325,15 @@ class Story():
         render_text_centered(txt, self.screen, TEXT_X, TEXT_Y, S_WIDTH)
         yield
 
+        # Clear text
+        pygame.draw.rect(self.screen, (0, 0, 0), self.text_rect)
+        txt = 'Thanks for playing!\n'
+        if self.lockpick:
+            txt = txt + 'See if you can win with the sword\n'
+            self.reset_choices()
+        else:
+            txt = txt + 'See if you can win with the lockpicks\n'
+            self.reset_choices()
+
+        render_text_centered(txt, self.screen, TEXT_X, TEXT_Y, S_WIDTH)
+        yield

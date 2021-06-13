@@ -12,7 +12,11 @@ def main():
     pygame.init()
 
     # create a surface on screen that has the size of 240 x 180
+    #screen = pygame.display.set_mode((S_WIDTH+200, S_HEIGHT+200))
     screen = pygame.display.set_mode((S_WIDTH, S_HEIGHT))
+    #screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    change_screen_size(screen.get_width(), screen.get_height())
+
     # Initialise text
     pygame.font.init()  # you have to call this at the start,
 
@@ -43,6 +47,9 @@ def main():
                     more_story = story.story_loop(user_text)
                     if story.valid_text:
                         user_text = ''
+                elif event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
                 # Unicode standard is used for string formation
                 else:
                     user_text += event.unicode

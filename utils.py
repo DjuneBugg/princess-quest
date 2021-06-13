@@ -10,6 +10,15 @@ TEXT_Y = B_HEIGHT
 INPUT_X = math.floor(S_WIDTH/2)
 INPUT_Y = S_HEIGHT - 75
 
+def change_screen_size(width, height):
+    S_WIDTH = width
+    S_HEIGHT = height
+    B_WIDTH = S_WIDTH
+    B_HEIGHT = S_HEIGHT - 400
+    TEXT_X = math.floor(S_WIDTH / 2)
+    TEXT_Y = B_HEIGHT
+    INPUT_X = math.floor(S_WIDTH / 2)
+    INPUT_Y = S_HEIGHT - 75
 
 def render_text_centered(text, screen, x, y, allowed_width=math.inf, font=None, colour=(255,255,255)):
     # Default font if not provided
