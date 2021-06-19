@@ -31,7 +31,7 @@ def main():
 
     # Text handling
     user_text = ''
-    input_font = pygame.font.SysFont('Comic Sans MS', 30)
+    input_font = pygame.font.SysFont('Comic Sans MS', TEXT_SIZE)
     input_rect = pygame.Rect(INPUT_X, INPUT_Y, 140, 50)
     input_rect_colour = (0,0,0)
 

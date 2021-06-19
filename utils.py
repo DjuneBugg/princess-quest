@@ -1,15 +1,16 @@
 import math
 import pygame
 
-S_WIDTH = 1700
-S_HEIGHT = 1200
-B_HEIGHT = S_HEIGHT - 500
+S_WIDTH = 1200
+S_HEIGHT = 800
+B_HEIGHT = math.floor(S_HEIGHT*0.75)
 B_WIDTH = S_WIDTH
-B_HEIGHT = S_HEIGHT - 400
 TEXT_X = math.floor(S_WIDTH / 2)
 TEXT_Y = B_HEIGHT
 INPUT_X = math.floor(S_WIDTH / 2)
 INPUT_Y = S_HEIGHT - 75
+
+TEXT_SIZE = 20
 
 class MySurface(pygame.Surface):
 
@@ -31,7 +32,7 @@ class MySurface(pygame.Surface):
 def render_text_centered(text, screen, x, y, allowed_width=math.inf, font=None, colour=(255,255,255)):
     # Default font if not provided
     if not font:
-        font = pygame.font.SysFont('Comic Sans MS', 30)
+        font = pygame.font.SysFont('Comic Sans MS', TEXT_SIZE)
 
     input_lines = text.splitlines()
 
