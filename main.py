@@ -2,20 +2,29 @@ from typing import *
 import pygame
 import sys
 
+import utils
 from utils import *
 from sprite import MySprite
 from story import Story
 
 # define a main function
 def main():
+    # Monkeypatch pygame Surface to use MySurface
+    pygame.Surface = utils.MySurface
+
     # initialize the pygame module
+    pygame.mixer.pre_init()
+    pygame.mixer.init()
+    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.Channel(0).set_volume(1)
     pygame.init()
 
     # create a surface on screen that has the size of 240 x 180
-    #screen = pygame.display.set_mode((S_WIDTH+200, S_HEIGHT+200))
     screen = pygame.display.set_mode((S_WIDTH, S_HEIGHT))
+    #screen = pygame.display.set_mode((INIT_S_WIDTH, INIT_S_WIDTH), pygame.RESIZABLE)
+
     #screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    change_screen_size(screen.get_width(), screen.get_height())
+    #change_screen_size(screen.get_width(), screen.get_height())
 
     # Initialise text
     pygame.font.init()  # you have to call this at the start,
@@ -53,6 +62,10 @@ def main():
                 # Unicode standard is used for string formation
                 else:
                     user_text += event.unicode
+            elif event.type == pygame.VIDEORESIZE:
+                # Change screen resolution
+                screen = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+                story.screen = screen
 
         # Draw input text box
         pygame.draw.rect(screen, input_rect_colour, input_rect)

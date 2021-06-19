@@ -3,22 +3,30 @@ import pygame
 
 S_WIDTH = 1700
 S_HEIGHT = 1200
+B_HEIGHT = S_HEIGHT - 500
 B_WIDTH = S_WIDTH
-B_HEIGHT = 900
-TEXT_X = math.floor(S_WIDTH/2)
+B_HEIGHT = S_HEIGHT - 400
+TEXT_X = math.floor(S_WIDTH / 2)
 TEXT_Y = B_HEIGHT
-INPUT_X = math.floor(S_WIDTH/2)
+INPUT_X = math.floor(S_WIDTH / 2)
 INPUT_Y = S_HEIGHT - 75
 
-def change_screen_size(width, height):
-    S_WIDTH = width
-    S_HEIGHT = height
-    B_WIDTH = S_WIDTH
-    B_HEIGHT = S_HEIGHT - 400
-    TEXT_X = math.floor(S_WIDTH / 2)
-    TEXT_Y = B_HEIGHT
-    INPUT_X = math.floor(S_WIDTH / 2)
-    INPUT_Y = S_HEIGHT - 75
+class MySurface(pygame.Surface):
+
+    def __init__(self, *args, **kwargs):
+        super(pygame.Surface, self).__init__(*args, **kwargs)
+        self.change_screen_size(self.get_width(), self.get_height())
+
+    def change_screen_size(self, width, height):
+        self.S_WIDTH = width
+        self.S_HEIGHT = height
+        self.B_WIDTH = self.S_WIDTH
+        self.B_HEIGHT = self.S_HEIGHT - 400
+        self.TEXT_X = math.floor(self.S_WIDTH / 2)
+        self.TEXT_Y = self.B_HEIGHT
+        self.INPUT_X = math.floor(self.S_WIDTH / 2)
+        self.INPUT_Y = self.S_HEIGHT - 75
+
 
 def render_text_centered(text, screen, x, y, allowed_width=math.inf, font=None, colour=(255,255,255)):
     # Default font if not provided

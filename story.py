@@ -94,8 +94,10 @@ class Story():
                 yield
             elif self.input_text[0] == 'l':
                 self.lockpick = True
+                pygame.mixer.Channel(0).play(pygame.mixer.Sound('audio/lockpick.mp3'))
                 valid_text = True
             elif self.input_text[0] == 's':
+                pygame.mixer.Channel(0).play(pygame.mixer.Sound('audio/sword.mp3'))
                 self.sword = True
                 valid_text = True
             else:
@@ -138,10 +140,12 @@ class Story():
                 txt = 'You defeat the goblin with your sword'
             else:
                 txt = 'You have no sword! While fighting, the goblin manages to nibble your pinky off'
+                pygame.mixer.Channel(0).play(pygame.mixer.Sound('audio/pinky.mp3'))
                 self.pinky = False
         if self.sneak:
             if self.sword:
                 txt = 'The goblin catches a glimpse of your big shiny sword! While fighting, the goblin manages to nibble your pinky off'
+                pygame.mixer.Channel(0).play(pygame.mixer.Sound('audio/pinky.mp3'))
                 self.pinky = False
             else:
                 txt = 'You manage to sneak past the goblin'
@@ -255,6 +259,7 @@ class Story():
                     pygame.draw.rect(self.screen, (0, 0, 0), self.text_rect)
                     render_text_centered(txt + '\nYou stepped too far back and fell onto the stairs. Try again', self.screen, TEXT_X,
                                          TEXT_Y, S_WIDTH)
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('audio/down_stairs.mp3'))
                     yield
                 elif number > 2:
                     txt = 'You dodged it, great job!'
