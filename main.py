@@ -28,6 +28,7 @@ def main():
 
     # Initialise text
     pygame.font.init()  # you have to call this at the start,
+    pygame.display.set_caption('Princess Quest')
 
     # Text handling
     user_text = ''
